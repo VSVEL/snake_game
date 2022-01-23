@@ -27,13 +27,19 @@ class Snake:
     def extend(self):
         self.add_segment(self.snake[-1].position())
 
-
     def move(self):
         for snake_num in range(len(self.snake) - 1, 0, -1):
             new_x = self.snake[snake_num - 1].xcor()
             new_y = self.snake[snake_num - 1].ycor()
             self.snake[snake_num].goto(new_x, new_y)
         self.head.forward(moving_distance)
+
+    def reset(self):
+        for seg in self.snake:
+            seg.goto(1500,1500)
+        self.snake.clear()
+        self.create_snake()
+        self.head = self.snake[0]
 
     def up(self):
         if self.head.heading() != DOWN:
